@@ -33,6 +33,8 @@ public final class ConjurConnectionManager {
 
 		try {
 			
+			System.out.println("Inside get Connection"+System.getenv("CONJUR_ACCOUNT"));
+			
 			Conjur conjur = new Conjur();
 
 			logger.info("Connection with Conjur is successful");

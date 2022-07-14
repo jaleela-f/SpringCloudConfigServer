@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.EnumerablePropertySource;
 
 import com.cyberark.conjur.api.Conjur;
@@ -22,6 +23,7 @@ import com.cyberark.conjur.api.Conjur;
  * time from the conjur vault.
  *
  */
+
 
 public class ConjurPropertySource {
 
@@ -38,25 +40,31 @@ public class ConjurPropertySource {
 	}
 
 	@Autowired
-	public void getConjurConnection(@Value("${CONJUR.API_KEY}") String authApiKey,
-			@Value("${CONJUR.ACCOUNT}") String account, @Value("${CONJUR.APPLIANCE_URL}") String url,
-			@Value("${CONJUR.AUTHN_LOGIN}") String authLogin) throws UnsupportedEncodingException
+	public void getConjurConnection(@Value("${CONJUR.ACCOUNT}") String account,@Value("${CONJUR.APPLIANCE_URL}") String url,
+			@Value("${CONJUR.AUTHN_LOGIN}") String authLogin,
+			@Value("${CONJUR.API_KEY}") String authApiKey
+			) throws UnsupportedEncodingException
 
 	{
 		Map<String, String> conjurParameters = new HashMap<String, String>();
-		conjurParameters.put("CONJUR_AUTHN_API_KEY", authApiKey);
 		conjurParameters.put("CONJUR_ACCOUNT", account);
 		conjurParameters.put("CONJUR_APPLIANCE_URL", url);
 		conjurParameters.put("CONJUR_AUTHN_LOGIN", authLogin);
-
+		conjurParameters.put("CONJUR_AUTHN_API_KEY", authApiKey.trim());
+		
+		System.out.println("Auth API Key value"+authApiKey);
+		System.out.println("Account>>>"+account);
+		System.out.println("URl>>>"+url);
+		System.out.println("Login>>>"+authLogin);
+		
 		try {
 			loadEnvironmentParameters(conjurParameters);
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		 Object secret=getPropertyMethod();
-		 System.out.println("Inside getConnection"+secret);
+		Object secret=getPropertyMethod();
+		System.out.println("Inside getConnection"+secret);
 	}
 
 	/**

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.cyber.conjur.configserver.core.ConjurPropertySource;
 
 
-@Configuration
+
 public class ConjurPropertyConfig {
 	
 	
