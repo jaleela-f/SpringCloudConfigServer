@@ -1,8 +1,9 @@
 /Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/config/ConjurConfig.java
 /Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/conjurproperty/SecretProperty.java
 /Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/core/ConjurPropertySource.java
-/Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/processor/ConjurPorpertyListener.java
+/Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/processor/AppListener.java
 /Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/utils/ConjurPropertyLoaderUtil.java
 /Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/ClientApplication.java
+/Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/processor/ConjurEnvironmentProcessor.java
 /Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/processor/ConjurValueProcessor.java
 /Applications/CyberArkProject/SpringCloudConfigProject/ClientApp/src/main/java/com/cyberark/conjur/clientapp/core/ConjurConnectionManager.java

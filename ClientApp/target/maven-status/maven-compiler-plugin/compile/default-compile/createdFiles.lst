@@ -1,5 +1,8 @@
+com/cyberark/conjur/clientapp/config/ConjurConfig.class
 com/cyberark/conjur/clientapp/conjurproperty/SecretProperty.class
 com/cyberark/conjur/clientapp/core/ConjurConnectionManager.class
+com/cyberark/conjur/clientapp/ClientApplication.class
 com/cyberark/conjur/clientapp/processor/ConjurValueProcessor.class
+com/cyberark/conjur/clientapp/processor/AppListener.class
 com/cyberark/conjur/clientapp/core/ConjurPropertySource.class
 com/cyberark/conjur/clientapp/utils/ConjurPropertyLoaderUtil.class

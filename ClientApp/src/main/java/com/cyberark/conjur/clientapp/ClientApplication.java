@@ -25,13 +25,17 @@ public class ClientApplication implements CommandLineRunner
 	Environment env;
 	
 	@Value("${jenkins-app.dbUserName}")
-	public  String dbUserName;
+	private  String userName;
 	
 	@Value("${jenkins-app.dbPassword}")
-	public String dbPassword;
+	private String password;
 	
 	@Value("${jenkins-app.dbUrl}")
-	public String dbUrl;
+	private String url;
+	
+	//@Value("${app.name}")
+	//private String valuePath;
+
 	
 	/*
 	 * public static String getDbUserName() { return dbUserName; }
@@ -52,9 +56,14 @@ public class ClientApplication implements CommandLineRunner
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Property >>>>>>>"+dbUserName);
-		System.out.println("Property >>>>>>>"+dbPassword);
-		System.out.println("Property >>>>>>>>"+dbUrl);
+		System.out.println("Property >>>>>>>"+userName);
+		System.out.println("Property >>>>>>>"+password);
+		System.out.println("Property >>>>>>>>"+url);
+		//System.out.println("Property >>>>>>>>"+valuePath);
+	
+		System.out.println("Property >>>>>>>"+System.getProperty("jenkins-app.dbUserName"));
+		System.out.println("Property >>>>>>>"+System.getProperty("jenkins-app.dbPassword"));
+		System.out.println("Property >>>>>>>>"+System.getProperty("jenkins-app.dbUrl"));
 		
 	}
 

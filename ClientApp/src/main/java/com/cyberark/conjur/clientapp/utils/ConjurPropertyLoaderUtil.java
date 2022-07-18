@@ -1,7 +1,14 @@
 package com.cyberark.conjur.clientapp.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,10 +16,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
+
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.config.environment.Environment;
+import org.springframework.cloud.config.environment.PropertySource;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.util.DefaultPropertiesPersister;
+import org.springframework.util.ResourceUtils;
 
 public class ConjurPropertyLoaderUtil {
 
-	private final Properties conjurProps = new Properties();
+	private Properties conjurProps = new Properties();
+	
+	@Autowired
+	private ResourceLoader resourceLoader;
+	
+	@Autowired
+	Environment env;
 
 	public void readPropertiesFromFile() {
 		try {
@@ -22,6 +52,11 @@ public class ConjurPropertyLoaderUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public Set<Object> getKey()
+	{
+		return conjurProps.keySet();
 	}
 
 	public String getProperty(String key) {
@@ -41,7 +76,7 @@ public class ConjurPropertyLoaderUtil {
 		return propertyList;
 	}
 
-	public void loadEnvironmentParameters(Map<String, String> newenv)
+	public static void loadEnvironmentParameters(Map<String, String> newenv)
 			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		// System.out.println("calling inside vault" + newenv);
 
@@ -60,18 +95,40 @@ public class ConjurPropertyLoaderUtil {
 	}
 
 	public void loadSystemEnvironmentParameter(Map<String, String> params) {
-		final Map<String, String> updatedParam = new HashMap<String, String>();
-		Properties props = new Properties();
+		FileInputStream reader = null;
+        FileOutputStream writer = null;
+
+        File file = new File("src/main/resources/conjur.properties");
+
+        try {
+            reader = new FileInputStream(file);
+            writer = new FileOutputStream(file);
+
+            Properties p = new Properties();
+            p.load(reader);
+            
+          for(Map.Entry<String, String> kv : params.entrySet())
+          {
+        	  p.setProperty(kv.getKey(), kv.getValue());
+          }
+           
+            p.store(writer,"write a file");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+        	try {
+				reader.close();
+				writer.close();	
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+        }
+       // MutuableProperty
+    }
 	
-
-		for (Map.Entry<String, String> entry : params.entrySet()) {
-			//System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			
-			props.setProperty(entry.getKey(), entry.getValue());
-
-		}
-		System.setProperties(props);
-		
-	}
 
 }
