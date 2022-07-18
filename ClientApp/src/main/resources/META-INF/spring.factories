@@ -1,2 +1,10 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.cyberark.conjur.clientapp.processor.ConjurValueProcessor
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.cyberark.conjur.clientapp.processor.ConjurValueProcessor
+
+
+
+
+
+
+
+
+
